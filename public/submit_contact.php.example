@@ -1,0 +1,177 @@
+<?php
+/**
+ * Contact Form Submission Handler
+ * 
+ * This is a TEMPLATE file. Copy to submit_contact.php and add your credentials.
+ * DO NOT commit submit_contact.php with real credentials!
+ */
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+// Try to load via Composer's autoloader, otherwise fall back to manual includes
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require __DIR__ . '/vendor/autoload.php';
+} else {
+    require __DIR__ . '/PHPMailer/src/Exception.php';
+    require __DIR__ . '/PHPMailer/src/PHPMailer.php';
+    require __DIR__ . '/PHPMailer/src/SMTP.php';
+}
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
+
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+
+// Debug Logging
+$logFile = __DIR__ . '/debug_log.txt';
+function logStep($msg)
+{
+    global $logFile;
+    file_put_contents($logFile, date('[Y-m-d H:i:s] ') . $msg . "\n", FILE_APPEND);
+}
+
+logStep("Script started");
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $rawInput = file_get_contents("php://input");
+    logStep("Raw Input: " . $rawInput);
+
+    $input = json_decode($rawInput, true);
+    logStep("Decoded Input: " . print_r($input, true));
+
+    $name = htmlspecialchars(strip_tags($input['name'] ?? ''));
+    $email = filter_var($input['email'], FILTER_SANITIZE_EMAIL);
+    $phone = htmlspecialchars(strip_tags($input['phone']));
+
+    if (empty($name)) {
+        header('Content-Type: application/json');
+        echo json_encode(["success" => false, "message" => "Name is required"]);
+        exit;
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        header('Content-Type: application/json');
+        echo json_encode(["success" => false, "message" => "Invalid email format"]);
+        exit;
+    }
+
+    if (empty($phone)) {
+        header('Content-Type: application/json');
+        echo json_encode(["success" => false, "message" => "Phone number is required"]);
+        exit;
+    }
+
+    logStep("Validation passed. Initializing PHPMailer...");
+
+    $mail = new PHPMailer(true);
+    logStep("PHPMailer instantiated.");
+
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        logStep("SMTP Settings Configured.");
+        
+        // ⚠️ ADD YOUR CREDENTIALS HERE
+        $mail->Username = 'YOUR_EMAIL@gmail.com';      // Your Gmail address
+        $mail->Password = 'YOUR_APP_PASSWORD';         // Gmail App Password (16 chars)
+        
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+
+        // Recipients
+        $mail->setFrom('YOUR_EMAIL@gmail.com', 'Visibo Capital Form');
+        $mail->addAddress('YOUR_EMAIL@gmail.com');
+        $mail->addReplyTo($email);
+
+        // Content
+        $mail->isHTML(true);
+        $mail->Subject = 'New Waitlist Sign-up - Visibo Capital';
+
+        // Professional HTML Template
+        $mail->Body = "
+            <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;'>
+                <div style='background-color: #0f3949; padding: 20px; text-align: center;'>
+                    <h1 style='color: #F37916; margin: 0; font-size: 24px;'>Visibo Capital</h1>
+                </div>
+                <div style='padding: 20px; border: 1px solid #ddd; border-top: none;'>
+                    <h2 style='color: #0f3949; margin-top: 0;'>New Waitlist Submission</h2>
+                    <p style='font-size: 16px;'>You have received a new sign-up from the Coming Soon page.</p>
+                    <table style='width: 100%; border-collapse: collapse; margin-top: 20px;'>
+                        <tr>
+                            <td style='padding: 10px; border-bottom: 1px solid #eee; width: 120px; font-weight: bold; color: #555;'>Name:</td>
+                            <td style='padding: 10px; border-bottom: 1px solid #eee; font-size: 16px;'>$name</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 10px; border-bottom: 1px solid #eee; width: 120px; font-weight: bold; color: #555;'>Email:</td>
+                            <td style='padding: 10px; border-bottom: 1px solid #eee; font-size: 16px;'>$email</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 10px; border-bottom: 1px solid #eee; font-weight: bold; color: #555;'>Phone:</td>
+                            <td style='padding: 10px; border-bottom: 1px solid #eee; font-size: 16px;'>$phone</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 10px; border-bottom: 1px solid #eee; font-weight: bold; color: #555;'>Time:</td>
+                            <td style='padding: 10px; border-bottom: 1px solid #eee; color: #777;'>" . date('Y-m-d H:i:s') . "</td>
+                        </tr>
+                    </table>
+                    <p style='margin-top: 30px; font-size: 14px; color: #888;'>This is an automated notification from your website.</p>
+                </div>
+                <div style='background-color: #f4f4f4; padding: 15px; text-align: center; font-size: 12px; color: #aaa; border: 1px solid #ddd; border-top: none;'>
+                    &copy; " . date('Y') . " Visibo Capital. All rights reserved.
+                </div>
+            </div>
+        ";
+
+        $mail->AltBody = "New Waitlist Submission\n\nName: $name\nEmail: $email\nPhone: $phone\nTime: " . date('Y-m-d H:i:s');
+
+        $mail->send();
+        logStep("Email sent successfully.");
+
+        // Send data to Google Sheets
+        // ⚠️ ADD YOUR GOOGLE APPS SCRIPT URL HERE
+        $sheetUrl = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+        $sheetData = json_encode([
+            'name' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'message' => 'Signed up from Coming Soon page'
+        ]);
+
+        $ch = curl_init($sheetUrl);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $sheetData);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $sheetResponse = curl_exec($ch);
+        $curlError = curl_error($ch);
+        curl_close($ch);
+
+        if ($curlError) {
+            logStep("Google Sheets Error: " . $curlError);
+        } else {
+            logStep("Google Sheets Response: " . $sheetResponse);
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode(["success" => true, "message" => "Thank you! We'll be in touch."]);
+    } catch (\Throwable $e) {
+        logStep("Fatal Error: " . $e->getMessage());
+        header('Content-Type: application/json');
+        http_response_code(500);
+        echo json_encode(["success" => false, "message" => "Server Error: " . $e->getMessage()]);
+    }
+} else {
+    header('Content-Type: application/json');
+    http_response_code(405);
+    echo json_encode(["success" => false, "message" => "Method not allowed"]);
+}
+?>

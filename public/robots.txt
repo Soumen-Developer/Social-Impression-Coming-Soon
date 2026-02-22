@@ -1,0 +1,17 @@
+# Robots.txt for Visibo Capital
+# https://www.visibocapital.com
+
+User-agent: *
+Allow: /
+
+# Disallow admin/sensitive paths
+Disallow: /submit_contact.php
+Disallow: /debug_log.txt
+Disallow: /test_email.php
+Disallow: /PHPMailer/
+
+# Sitemap
+Sitemap: https://visibocapital.com/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1

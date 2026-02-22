@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Hostinger deployment bundle (contains sensitive configs)
+hostinger_deploy_bundle/
+
+# Sensitive files with credentials
+public/submit_contact.php
+public/debug_log.txt
+public/test_email.php
+
+# Debug logs
+public/debug_log.txt
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript cache
+*.tsbuildinfo

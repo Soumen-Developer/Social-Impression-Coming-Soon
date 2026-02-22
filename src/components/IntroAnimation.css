@@ -1,0 +1,90 @@
+.intro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: var(--color-bg-dark-1);
+    /* This gets overridden by Framer Motion instantly */
+    transition: background-color 1s ease;
+    padding-bottom: 60px;
+}
+
+/* When in header mode, shrink container to just the header area */
+.intro-container.header-mode {
+    height: auto;
+    align-items: flex-start;
+    padding: 20px 40px;
+    background-color: transparent !important;
+    pointer-events: none;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.intro-logo {
+    height: 80px;
+    width: auto;
+    filter: blur(0px);
+    /* Base state for Framer Motion to grab */
+}
+
+.intro-text {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.brand-name {
+    font-family: 'Bodoni Moda', serif;
+    font-size: clamp(2.4rem, 5vw, 2.4rem);
+    font-weight: 600;
+    /* Semibold for a more premium look */
+    line-height: 1;
+    color: #fff;
+    letter-spacing: 0.02em;
+    /* Serifs need less letter spacing than sans-serifs */
+    margin: 0;
+    padding-left: 15px;
+    padding-top: 15px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    /* Very subtle divider */
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    height: 80px;
+    white-space: nowrap;
+}
+
+.brand-name .capital {
+    color: #fff;
+    font-weight: normal;
+    /* Serif fonts often don't need bold capital highlights */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .intro-container.header-mode {
+        padding: 15px 20px;
+    }
+
+    .logo-wrapper {
+        gap: 12px;
+    }
+
+    .intro-logo {
+        height: 50px;
+    }
+
+    .brand-name {
+        font-size: 1.6rem;
+        padding-left: 10px;
+        height: 50px;
+    }
+}

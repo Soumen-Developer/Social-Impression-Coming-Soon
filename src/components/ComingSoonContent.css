@@ -1,0 +1,520 @@
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    justify-content: space-between;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    background-color: var(--base-dark);
+}
+
+.page-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* --- Dynamic Background --- */
+.dynamic-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blur-asset {
+    width: 100vw;
+    min-width: 1200px;
+    height: auto;
+    opacity: 0.8;
+    display: block;
+}
+
+@keyframes breathing-top {
+    0% {
+        transform: translateY(-5%) scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateY(0%) scale(1.05);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-5%) scale(1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes breathing-bottom {
+    0% {
+        transform: translateY(5%) scale(1.05);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(0%) scale(1);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translateY(5%) scale(1.05);
+        opacity: 1;
+    }
+}
+
+.blur-asset-top {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    z-index: -1;
+}
+
+.blur-asset-bottom {
+    position: absolute;
+    bottom: -15%;
+    right: -10%;
+    z-index: -1;
+}
+
+.breathing-top {
+    animation: breathing-top 15s ease-in-out infinite;
+}
+
+.breathing-bottom {
+    animation: breathing-bottom 18s ease-in-out infinite;
+}
+
+/* Utility classes */
+.text-grey {
+    color: #939393;
+}
+
+.text-bold {
+    font-weight: 900;
+}
+
+/* Coming Soon Splash phase (Clean modern, no more shimmer) */
+.coming-soon-splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.coming-soon-hero {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: clamp(3.5rem, 10vw, 7.5rem);
+    /* Larger and more impactful */
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    /* Serif fonts usually have tighter spacing than sans */
+    color: #fff;
+    text-shadow:
+        0 4px 60px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(255, 255, 255, 0.1);
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.coming-soon-subhero {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 15px;
+    text-align: center;
+}
+
+.coming-soon-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    position: relative;
+    z-index: 5;
+    color: #fff;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+
+@media (max-width: 768px) {
+    .coming-soon-container {
+        padding-top: 20px;
+    }
+}
+
+.content-wrapper {
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 10px auto 0;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* --- Premium Header --- */
+.premium-header {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    height: 80px;
+}
+
+.header-logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logotext-svg {
+    height: 80px;
+    width: auto;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.contact-button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    padding: 8px 24px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contact-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.hamburger-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 30px;
+    height: 1px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+/* --- Hero Typography --- */
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    color: #fff;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.4rem, 2.5vw, 1.6rem);
+    font-weight: 400;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+}
+
+.italic-text {
+    font-style: italic !important;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* --- Glassmorphic Form --- */
+.glass-form-container {
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 24px;
+    height: 100%;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    transition: color 0.3s ease;
+    z-index: 2;
+}
+
+.glass-input {
+    width: 100%;
+    padding: 16px 20px 16px 50px;
+    background: rgba(255, 255, 255, 0.12);
+    /* very transparent */
+    backdrop-filter: blur(12px);
+    /* Glass effect */
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.glass-input::placeholder {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.glass-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.glass-input.input-error {
+    border-color: rgba(255, 77, 77, 0.5);
+    background: rgba(255, 77, 77, 0.05);
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.15);
+}
+
+.glass-input.input-error:focus {
+    border-color: rgba(255, 77, 77, 0.8);
+    background: rgba(255, 77, 77, 0.08);
+    box-shadow: 0 0 20px rgba(255, 77, 77, 0.2);
+}
+
+/* --- Premium Buttons --- */
+.join-waitlist-button {
+    background: #ffffff;
+    color: var(--color-black);
+    border: none;
+    padding: 20px 40px;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 800;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.join-waitlist-button:hover {
+    transform: translateY(-3px) scale(1.00);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.join-waitlist-button.loading {
+    background: #e0e0e0;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+/* --- Success Glass Card --- */
+.success-glass-card {
+    width: 100%;
+    max-width: 440px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.success-icon-wrapper {
+    width: 64px;
+    height: 64px;
+    background: rgba(74, 222, 128, 0.15);
+    border: 1px solid rgba(74, 222, 128, 0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: #4ade80;
+}
+
+.success-svg {
+    width: 32px;
+    height: 32px;
+}
+
+.success-glass-title {
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 1.8rem;
+    color: #fff;
+    margin: 0 0 12px 0;
+    letter-spacing: 0.02em;
+}
+
+.success-glass-text {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin: 0 0 25px 0;
+}
+
+.success-back-btn {
+    padding: 12px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.success-back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.form-error-msg {
+    color: #ff4d4d;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.waitlist-icon {
+    height: 24px;
+    width: 24px;
+    filter: brightness(0);
+    /* Makes it black since the source is white */
+}
+
+/* --- Simple Footer --- */
+.simple-footer {
+    width: 100%;
+    text-align: center;
+    /* padding: 10px; */
+    z-index: 5;
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.simple-footer p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+    text-align: center;
+    margin: 0;
+}
+
+/* Mobile Responsiveness Fixes */
+@media (max-width: 768px) {
+    .premium-header {
+        padding: 0 20px;
+        margin-bottom: 10px;
+    }
+
+    .logo-svg {
+        height: 36px;
+    }
+
+    .logotext-svg {
+        height: 38px;
+    }
+
+    .contact-button {
+        padding: 6px 16px;
+        font-size: 0.75rem;
+    }
+
+    .coming-soon-simple {
+        padding: 20px 15px;
+        gap: 10px;
+    }
+
+    .coming-soon-simple .coming-soon-title {
+        font-size: clamp(1.8rem, 8vw, 3.5rem) !important;
+        line-height: 1.1;
+    }
+
+    .glass-form-container {
+        padding: 0 10px;
+    }
+
+    .hero-title,
+    .hero-subtitle,
+    .hero-description,
+    .simple-footer p {
+        text-align: center !important;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
