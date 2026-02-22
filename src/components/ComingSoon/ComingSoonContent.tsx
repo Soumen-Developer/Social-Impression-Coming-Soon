@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import './ComingSoonContent.css';
 import JoinWaitlistForm from '../Waitlist/WaitlistForm';
@@ -13,6 +14,31 @@ interface ComingSoonContentProps {
 }
 
 const ComingSoonContent = ({ onSplashComplete }: ComingSoonContentProps) => {
+    const containerVariants: Variants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.6
+            }
+        },
+        exit: {
+            opacity: 0,
+            scale: 0.95,
+            transition: { duration: 0.4 }
+        }
+    };
+
+    const itemVariants: Variants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+        }
+    };
+
     const hasSeenContent = sessionStorage.getItem('social_impression_content_shown');
     const [stage, setStage] = useState<'coming-soon' | 'content'>(hasSeenContent ? 'content' : 'coming-soon');
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -156,13 +182,18 @@ const ComingSoonContent = ({ onSplashComplete }: ComingSoonContentProps) => {
                             >
                                 <img src={logotext} alt="Social Impression" className="logotext-svg" />
                             </motion.div>
-                            <div className="header-actions">
+                            <motion.div
+                                className="header-actions"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.8, delay: 0.5 }}
+                            >
                                 <button className="contact-button">CONTACT</button>
                                 <div className="hamburger-menu">
                                     <span></span>
                                     <span></span>
                                 </div>
-                            </div>
+                            </motion.div>
                         </header>
 
                         <div className="content-wrapper">
@@ -238,11 +269,12 @@ const ComingSoonContent = ({ onSplashComplete }: ComingSoonContentProps) => {
                                     <motion.div
                                         key="form-container"
                                         className="glass-form-container"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0, scale: 0.95 }}
+                                        variants={containerVariants}
+                                        initial="hidden"
+                                        animate="visible"
+                                        exit="exit"
                                     >
-                                        <div className="input-group">
+                                        <motion.div className="input-group" variants={itemVariants}>
                                             <div className="input-icon">
                                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -261,8 +293,8 @@ const ComingSoonContent = ({ onSplashComplete }: ComingSoonContentProps) => {
                                                 disabled={status === 'loading'}
                                                 maxLength={50}
                                             />
-                                        </div>
-                                        <div className="input-group">
+                                        </motion.div>
+                                        <motion.div className="input-group" variants={itemVariants}>
                                             <div className="input-icon">
                                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -281,8 +313,8 @@ const ComingSoonContent = ({ onSplashComplete }: ComingSoonContentProps) => {
                                                 disabled={status === 'loading'}
                                                 maxLength={100}
                                             />
-                                        </div>
-                                        <div className="input-group">
+                                        </motion.div>
+                                        <motion.div className="input-group" variants={itemVariants}>
                                             <div className="input-icon">
                                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M22 16.92V19.92C22 20.4723 21.5523 20.92 21 20.92C12.1634 20.92 5 13.7566 5 4.92001C5 4.36772 5.44772 3.92001 6 3.92001H9C9.55228 3.92001 10 4.36772 10 4.92001C10 6.00001 10.17 7.04001 10.48 8.01001C10.59 8.35001 10.51 8.73001 10.26 8.98001L8.41 10.83C9.69 13.11 11.58 15 13.86 16.29L15.71 14.44C15.96 14.19 16.34 14.11 16.68 14.22C17.65 14.54 18.69 14.71 19.77 14.71C20.3223 14.71 20.77 15.1577 20.77 15.71V16.92V16.92Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -300,16 +332,18 @@ const ComingSoonContent = ({ onSplashComplete }: ComingSoonContentProps) => {
                                                 disabled={status === 'loading'}
                                                 maxLength={20}
                                             />
-                                        </div>
+                                        </motion.div>
 
-                                        <button
+
+                                        <motion.button
                                             onClick={handleSubmit}
                                             disabled={status === 'loading'}
                                             className={`join-waitlist-button ${status}`}
+                                            variants={itemVariants}
                                         >
                                             {status === 'loading' ? 'SENDING...' : 'JOIN THE WAITLIST'}
                                             <img src={logo} alt="" className="waitlist-icon" />
-                                        </button>
+                                        </motion.button>
 
                                         {status === 'error' && <p className="form-error-msg">{errorMessage}</p>}
                                     </motion.div>

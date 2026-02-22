@@ -11,7 +11,7 @@
     background-color: var(--color-bg-dark-1);
     /* This gets overridden by Framer Motion instantly */
     transition: background-color 1s ease;
-    padding-bottom: 60px;
+    /* padding-bottom: 60px; */
 }
 
 /* When in header mode, shrink container to just the header area */
