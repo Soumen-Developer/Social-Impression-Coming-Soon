@@ -33,7 +33,7 @@ const ComingSoonContent = ({ onSplashComplete }: ComingSoonContentProps) => {
             setStage('content');
             sessionStorage.setItem('social_impression_content_shown', 'true');
             if (onSplashComplete) onSplashComplete();
-        }, 8000);
+        }, 4000);
         return () => clearTimeout(timer);
     }, [stage, onSplashComplete]);
 
