@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './ComingSoonContent.css';
 import JoinWaitlistForm from '../Waitlist/WaitlistForm';
 
@@ -13,32 +13,33 @@ interface ComingSoonContentProps {
     onSplashComplete?: () => void;
 }
 
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.6
+        }
+    },
+    exit: {
+        opacity: 0,
+        scale: 0.95,
+        transition: { duration: 0.4 }
+    }
+};
+
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+    }
+};
+
 const ComingSoonContent = ({ onSplashComplete }: ComingSoonContentProps) => {
-    const containerVariants: Variants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1,
-                delayChildren: 0.6
-            }
-        },
-        exit: {
-            opacity: 0,
-            scale: 0.95,
-            transition: { duration: 0.4 }
-        }
-    };
-
-    const itemVariants: Variants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-        }
-    };
-
+    const splashCalled = useRef(false);
     const hasSeenContent = sessionStorage.getItem('social_impression_content_shown');
     const [stage, setStage] = useState<'coming-soon' | 'content'>(hasSeenContent ? 'content' : 'coming-soon');
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,14 +52,20 @@ const ComingSoonContent = ({ onSplashComplete }: ComingSoonContentProps) => {
 
     useEffect(() => {
         if (stage === 'content') {
-            if (onSplashComplete) onSplashComplete();
+            if (onSplashComplete && !splashCalled.current) {
+                splashCalled.current = true;
+                onSplashComplete();
+            }
             return;
         }
 
         const timer = setTimeout(() => {
             setStage('content');
             sessionStorage.setItem('social_impression_content_shown', 'true');
-            if (onSplashComplete) onSplashComplete();
+            if (onSplashComplete && !splashCalled.current) {
+                splashCalled.current = true;
+                onSplashComplete();
+            }
         }, 4000);
         return () => clearTimeout(timer);
     }, [stage, onSplashComplete]);
@@ -272,7 +279,6 @@ const ComingSoonContent = ({ onSplashComplete }: ComingSoonContentProps) => {
                                         variants={containerVariants}
                                         initial="hidden"
                                         animate="visible"
-                                        exit="exit"
                                     >
                                         <motion.div className="input-group" variants={itemVariants}>
                                             <div className="input-icon">
