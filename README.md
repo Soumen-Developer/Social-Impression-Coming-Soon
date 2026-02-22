@@ -2,7 +2,6 @@
 
 <div align="center">
 
-![Social Impression Logo](./src/assets/logo.svg)
 ![Social Impression Text](./src/assets/logotext.svg)
 
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
@@ -100,10 +99,14 @@ Social Impression is a next-generation platform for musicians. This repository c
 
 ```text
 src/
-├── assets/          # SVG, Images, and Design References
-├── components/      # React Components (ComingSoon, Form, Intro)
-├── App.tsx          # Main Application Entry
-└── index.css        # Global Design System & Variables
+├── assets/              # SVG, Images, and Design References
+│   └── refrence/        # Design source files and mockups
+├── components/          # Modular React Components
+│   ├── ComingSoon/      # Main layout and hero content
+│   ├── Intro/           # Premium branding intro animation
+│   └── Waitlist/        # Glassmorphic form and submission logic
+├── App.tsx              # Application orchestration
+└── index.css            # Global theme and design tokens
 ```
 
 ---
