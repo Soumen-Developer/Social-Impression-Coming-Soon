@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import './App.css';
-import IntroAnimation from './components/IntroAnimation';
-import ComingSoonContent from './components/ComingSoonContent';
+import IntroAnimation from './components/Intro/IntroAnimation';
+import ComingSoonContent from './components/ComingSoon/ComingSoonContent';
 
 function App() {
   // Initialize state from session storage

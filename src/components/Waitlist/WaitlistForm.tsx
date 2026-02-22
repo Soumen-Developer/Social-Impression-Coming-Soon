@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import './Form.css';
+import './WaitlistForm.css';
 
 interface JoinWaitlistFormProps {
     isOpen: boolean;
@@ -77,7 +77,7 @@ const JoinWaitlistForm = ({ isOpen, onClose }: JoinWaitlistFormProps) => {
             let result;
             try {
                 result = JSON.parse(text);
-            } catch (err) {
+            } catch {
                 console.error("Failed to parse JSON response:", text);
                 throw new Error("Invalid server response");
             }

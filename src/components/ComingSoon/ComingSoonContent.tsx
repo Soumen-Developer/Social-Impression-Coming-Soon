@@ -1,12 +1,12 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import './ComingSoonContent.css';
-import JoinWaitlistForm from './form';
+import JoinWaitlistForm from '../Waitlist/WaitlistForm';
 
-import logo from '../assets/logo.svg';
-import logotext from '../assets/logotext.svg';
-import blurTop from '../assets/refrence/blur-top.svg';
-import blurBottom from '../assets/refrence/blur-bottom.svg';
+import logo from '../../assets/logo.svg';
+import logotext from '../../assets/logotext.svg';
+import blurTop from '../../assets/refrence/blur-top.svg';
+import blurBottom from '../../assets/refrence/blur-bottom.svg';
 
 interface ComingSoonContentProps {
     onSplashComplete?: () => void;

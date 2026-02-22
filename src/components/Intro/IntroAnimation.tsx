@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState, useRef } from 'react';
-import logo from '../assets/logo.svg';
+import logo from '../../assets/logo.svg';
 import './IntroAnimation.css';
 
 interface IntroAnimationProps {
