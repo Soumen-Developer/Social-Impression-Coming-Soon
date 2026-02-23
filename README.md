@@ -9,7 +9,14 @@
 [![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vitejs.dev/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 
-**A premium, high-conversion coming soon page featuring state-of-the-art glassmorphism and smooth motion design.**
+<br>
+
+<img src="https://img.shields.io/badge/PageSpeed_SEO_Mobile-99%2F100-success?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Mobile SEO Score 99/100" />
+<img src="https://img.shields.io/badge/PageSpeed_SEO_Desktop-100%2F100-success?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Desktop SEO Score 100/100" />
+
+<br><br>
+
+**A premium, high-conversion coming soon page featuring state-of-the-art glassmorphism, advanced SEO, and smooth motion design.**
 
 [View Live Project](https://github.com/Soumen-Developer/Social-Impression-Coming-Soon) • [Report Bug](https://github.com/Soumen-Developer/Social-Impression-Coming-Soon/issues) • [Request Feature](https://github.com/Soumen-Developer/Social-Impression-Coming-Soon/issues)
 
