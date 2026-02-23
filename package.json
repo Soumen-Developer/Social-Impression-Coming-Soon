@@ -15,6 +15,7 @@
     "@fontsource/outfit": "^5.2.8",
     "@fontsource/urbanist": "^5.2.7",
     "framer-motion": "^12.33.0",
+    "intl-tel-input": "^26.7.0",
     "lucide-react": "^0.575.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"

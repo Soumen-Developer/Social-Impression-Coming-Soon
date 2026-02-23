@@ -50,19 +50,21 @@ Social Impression is a next-generation platform for musicians. This repository c
 
 ### Backend & Integration
 
-- **PHP 8.x**: Lightweight backend for form processing.
-- **PHPMailer**: Support for SMTP-based professional email delivery.
-- **Google Sheets API**: Integrated via Apps Script for seamless lead management.
+- **PHP 8.x (LiteSpeed Optimized)**: Custom async architecture to prevent Hostinger timeouts.
+- **Silent Geo-Routing**: Native Cloudflare-aware IP tunneling `(geo.php)` for frictionless user location detection.
+- **PHPMailer**: Support for SMTP-based professional email delivery with PDF attachments.
+- **Google Sheets API**: Integrated via Apps Script for seamless, zero-maintenance database logging.
 
 ---
 
 ## 🚀 Key Features
 
 - [x] **Lead Capturing**: Robust waitlist form with real-time validation.
+- [x] **Global Reach**: Interactive `intl-tel-input` for seamless international phone formatting.
+- [x] **Invisible Geo Detection**: Automatically captures User Country, City, and Region without invasive browser prompts.
 - [x] **Mobile First**: Pixel-perfect responsiveness across all screen sizes.
-- [x] **Success States**: Premium animated checkmark and success confirmation card.
-- [x] **International Support**: Phone number validation supporting global formats.
-- [x] **SEO Optimized**: Meta tags and semantic HTML for visibility.
+- [x] **Success States**: Premium animated checkmark, custom 'SENDING' states and sliding success confirmation card.
+- [x] **Ultimate SEO**: JSON-LD Organization Schema, Open Graph tags, Twitter Cards, Canonical links, and advanced `.htaccess` GZIP/caching rules.
 
 ---
 

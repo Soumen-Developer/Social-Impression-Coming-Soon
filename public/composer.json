@@ -1,8 +1,0 @@
-{
-    "name": "visibo-capital/contact-form",
-    "description": "Contact Form backend for Visibo Capital",
-    "require": {
-        "phpmailer/phpmailer": "^6.9"
-    },
-    "license": "MIT"
-}

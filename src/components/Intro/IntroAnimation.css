@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'Sense';
+    src: url('../../assets/elegant-corporate-logo-sense-2025-09-05-19-17-31-utc/Sense/Sense.woff2') format('woff2'),
+        url('../../assets/elegant-corporate-logo-sense-2025-09-05-19-17-31-utc/Sense/Sense.woff') format('woff'),
+        url('../../assets/elegant-corporate-logo-sense-2025-09-05-19-17-31-utc/Sense/Sense.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 .intro-container {
     display: flex;
     justify-content: center;
@@ -42,14 +52,14 @@
 }
 
 .brand-name {
-    font-family: 'Bodoni Moda', serif;
+    font-family: 'Sense', sans-serif;
     font-size: clamp(2.4rem, 5vw, 2.4rem);
-    font-weight: 600;
-    /* Semibold for a more premium look */
+    font-weight: 700;
+    /* Adjusted for Sense font */
     line-height: 1;
     color: #fff;
-    letter-spacing: 0.02em;
-    /* Serifs need less letter spacing than sans-serifs */
+    letter-spacing: 0.1em;
+    /* Increased for modern sans-serif look */
     margin: 0;
     padding-left: 15px;
     padding-top: 15px;

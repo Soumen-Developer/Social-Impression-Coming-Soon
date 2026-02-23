@@ -1,17 +1,21 @@
-# Robots.txt for Visibo Capital
-# https://www.visibocapital.com
+# ============================================
+# robots.txt — Social Impression
+# https://socialimpression.co
+# ============================================
 
 User-agent: *
 Allow: /
 
-# Disallow admin/sensitive paths
+# Block access to backend scripts and sensitive files
 Disallow: /submit_contact.php
 Disallow: /debug_log.txt
-Disallow: /test_email.php
 Disallow: /PHPMailer/
+Disallow: /brochure/
+Disallow: /.env
+Disallow: /*.php$
 
-# Sitemap
-Sitemap: https://visibocapital.com/sitemap.xml
+# Sitemap (update once you create one)
+Sitemap: https://socialimpression.co/sitemap.xml
 
-# Crawl-delay for polite crawling
+# Crawl-delay (be kind to server)
 Crawl-delay: 1

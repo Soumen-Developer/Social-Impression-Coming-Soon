@@ -141,6 +141,158 @@
     color: #6b7280;
 }
 
+/* ===================================================
+   intl-tel-input Dark Theme Overrides
+   =================================================== */
+
+/* Phone input wrapper */
+.phone-input-wrapper {
+    position: relative;
+}
+
+/* Make the iti container fill the width */
+.phone-input-wrapper .iti {
+    width: 100%;
+}
+
+/* The phone input field — override intl-tel-input defaults */
+.phone-input-wrapper .iti input.phone-input {
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 0.75rem 1rem !important;
+    font-family: 'Urbanist', sans-serif !important;
+    font-size: 1rem !important;
+    color: #ffffff !important;
+    transition: all 0.2s !important;
+    box-sizing: border-box !important;
+    height: auto !important;
+}
+
+.phone-input-wrapper .iti input.phone-input:focus {
+    outline: none !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    box-shadow: none !important;
+}
+
+.phone-input-wrapper .iti input.phone-input::placeholder {
+    color: #6b7280 !important;
+}
+
+/* Selected flag / dial code button */
+.phone-input-wrapper .iti .iti__selected-country-primary {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 8px !important;
+}
+
+.phone-input-wrapper .iti .iti__selected-dial-code {
+    color: #9ca3af !important;
+    font-family: 'Urbanist', sans-serif !important;
+    font-size: 0.9rem !important;
+}
+
+.phone-input-wrapper .iti .iti__arrow {
+    border-top-color: #9ca3af !important;
+}
+
+.phone-input-wrapper .iti .iti__arrow--up {
+    border-bottom-color: #9ca3af !important;
+}
+
+/* Country dropdown list */
+.iti__country-list {
+    background: #1e1e1e !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
+    max-height: 220px !important;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+.iti__country-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.iti__country-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.iti__country-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+}
+
+.iti__country-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* Individual country items */
+.iti__country {
+    padding: 8px 12px !important;
+    transition: background 0.15s ease !important;
+}
+
+.iti__country-name {
+    color: #e5e7eb !important;
+    font-family: 'Urbanist', sans-serif !important;
+    font-size: 0.875rem !important;
+}
+
+.iti__dial-code {
+    color: #9ca3af !important;
+    font-family: 'Urbanist', sans-serif !important;
+}
+
+/* Hover / highlight state */
+.iti__country:hover,
+.iti__country--highlight {
+    background: rgba(243, 121, 22, 0.15) !important;
+}
+
+/* Active / selected country */
+.iti__country.iti__active {
+    background: rgba(243, 121, 22, 0.25) !important;
+}
+
+.iti__country.iti__active .iti__country-name {
+    color: #F37916 !important;
+    font-weight: 600 !important;
+}
+
+/* Search input in dropdown */
+.iti__search-input {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 6px !important;
+    color: #ffffff !important;
+    font-family: 'Urbanist', sans-serif !important;
+    font-size: 0.875rem !important;
+    padding: 8px 12px !important;
+    margin: 8px !important;
+    width: calc(100% - 16px) !important;
+    box-sizing: border-box !important;
+}
+
+.iti__search-input::placeholder {
+    color: #6b7280 !important;
+}
+
+.iti__search-input:focus {
+    outline: none !important;
+    border-color: rgba(243, 121, 22, 0.4) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Divider line between search and list */
+.iti__divider {
+    border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+    margin: 0 !important;
+}
+
 /* Submit Button */
 .submit-btn {
     width: 100%;
@@ -237,5 +389,85 @@
 @keyframes spin {
     to {
         transform: rotate(360deg);
+    }
+}
+
+/* --- Sending State Animation --- */
+.sending-animation-wrapper {
+    display: grid;
+    place-items: center;
+    min-height: 24px;
+}
+
+.music-notes-container {
+    display: flex;
+    gap: 16px;
+    grid-area: 1 / 1;
+    animation: hideNotesSequence 1.5s forwards;
+}
+
+@keyframes hideNotesSequence {
+
+    0%,
+    90% {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.sending-text {
+    grid-area: 1 / 1;
+    margin-left: 0;
+    opacity: 0;
+    animation: textFadeIn 0.5s ease forwards;
+    animation-delay: 1.5s;
+    white-space: nowrap;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@keyframes textFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.loading-music-note {
+    width: 26px;
+    height: 26px;
+    animation: noteLoading 1.5s infinite both;
+}
+
+.loading-music-note.note-1 {
+    animation-delay: 0s;
+}
+
+.loading-music-note.note-2 {
+    animation-delay: 0.2s;
+}
+
+.loading-music-note.note-3 {
+    animation-delay: 0.4s;
+}
+
+@keyframes noteLoading {
+
+    0%,
+    80%,
+    100% {
+        opacity: 0.2;
+        transform: translateY(0);
+    }
+
+    40% {
+        opacity: 1;
+        transform: translateY(-3px);
     }
 }
